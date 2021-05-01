@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.edu.ifsp.scl.pdm.intent2">
+    package="br.edu.ifsp.scl.pdm.Intent">
+
+    <!-- Permissões de versões abaixo de M eram feitas direto no Manifest-->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <!-- Fim das permissões-->
 
     <application
         android:allowBackup="true"
@@ -8,9 +12,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Intent2">
-        <activity android:name="br.edu.ifsp.scl.pdm.intent.OutraActivity"></activity>
-        <activity android:name="br.edu.ifsp.scl.pdm.intent.MainActivity">
+        android:theme="@style/Theme.Intent">
+        <activity android:name=".OutraActivity">
+            <intent-filter>
+                <action android:name ="RECEBER_E_RETORNAR_ACTION"/>
+                <category android:name ="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

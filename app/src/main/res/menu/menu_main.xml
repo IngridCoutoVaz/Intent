@@ -16,7 +16,7 @@
                 android:id="@+id/callMi"
                 android:title="Ligação"/>
             <item
-                android:id="@+id/diaMi"
+                android:id="@+id/dialMi"
                 android:title="Discador"/>
             <item
                 android:id="@+id/pickMi"
