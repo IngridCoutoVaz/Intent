@@ -117,13 +117,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(discarIntent);
                 return true;
             case R.id.pickMi:
-                Intent pegarImagemIntent = new Intent(Intent.ACTION_PICK);
-                String diretorioImagens = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath();
-                pegarImagemIntent.setDataAndType(Uri.parse(diretorioImagens), "image/*");
-                startActivityForResult(pegarImagemIntent, PICK_IMAGE_FILE_REQUEST_CODE);
+                startActivityForResult(getPickimagemIntent(), PICK_IMAGE_FILE_REQUEST_CODE);
                 return true;
+            case R.id.chooserMi:
+                //Força o usuário escolher entre uma lista de aplicativos MESMO que já existe um app padrão
+                    Intent escolherActivityIntent = new Intent(Intent.ACTION_CHOOSER);
+                    escolherActivityIntent.putExtra(Intent.EXTRA_INTENT, getPickimagemIntent());
+                    escolherActivityIntent.putExtra(Intent.EXTRA_TITLE, "Escollha um app para apresentar a aimagem");
+                    startActivityForResult(escolherActivityIntent, PICK_IMAGE_FILE_REQUEST_CODE);
+                    return true;
         }
         return false;
+    }
+
+    private Intent getPickimagemIntent(){
+        Intent pegarImagemIntent = new Intent(Intent.ACTION_PICK);
+        String diretorioImagens = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath();
+        pegarImagemIntent.setDataAndType(Uri.parse(diretorioImagens), "image/*");
+
+        return pegarImagemIntent;
     }
 
     private void verifyCallPhonePermission() {
@@ -167,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
             if(retorno != null){
                 activityMainBinding.retornoTV.setText(retorno);
             }else{
-                //Recebendo retornor da Activity de pegar imagens
+                //Recebendo retorno da Activity de pegar imagens
                 if(requestCode == PICK_IMAGE_FILE_REQUEST_CODE && resultCode == RESULT_OK){
                     Uri imagemUri = data.getData();
                     
